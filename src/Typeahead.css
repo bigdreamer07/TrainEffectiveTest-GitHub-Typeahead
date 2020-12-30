@@ -1,0 +1,54 @@
+.Typeahead-continer {
+  width: 40%;
+  min-width: 200px;
+}
+
+.Typeahead-input {
+  color: rgba(0, 0, 0, 0.73);
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  width: 100%;
+}
+
+.Typeahead-input:focus {
+  outline: none
+}
+
+.Typeahead-dropdown {
+  margin-top: 2px;
+  width: 100%;
+}
+
+.Typeahead-item {
+  width: 100%;
+  background-color: white;
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1.5px solid grey;
+  cursor: pointer;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 40px; height: 40px;
+}
+
+.user-name {
+  margin-left: 15px;
+  font-size: 14px;
+  color:rgba(0, 0, 0, 0.73);
+}
+
+.Loading-bar {
+  margin-top: 2px;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
