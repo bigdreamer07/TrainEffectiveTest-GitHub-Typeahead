@@ -27,7 +27,7 @@ const TypeaheadContent = props => {
       </div> }
       
       { !error && !data && <div className="Loading-bar">Loading...</div> }
-      { error || (data && !data.items) && <div className="Loading-bar">API call limit Exceed, Wait for a while...</div> }
+      { (error || (data && !data.items)) && <div className="Loading-bar">API call limit Exceed, Wait for a while...</div> }
     </>
   )
 }
