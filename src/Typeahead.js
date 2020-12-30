@@ -3,10 +3,10 @@ import useSWR from 'swr'
 import './Typeahead.css'; 
 
 const ApiURL = "https://api.github.com";
-const GithubGlientId = "75e3235a908a255af6ad";
-const GithubSecretKey = "a23eecc56bc36029b96ec002eda3bb182239ed24";
+const GithubGlientId = "4c0ffc70d474f99a";
+const GithubSecretKey = "5784ca4f30b5ee61a037874997c6fb7cbc4d0aaa";
 
-const fetcher = (...args) => fetch(...args).then(res => res.json());
+const fetcher = (...args) => fetch(...args, { headers: {'User-Agent': 'request'} }).then(res => res.json());
 
 const Item = props => {
   const { avatar_url, username } = props;
@@ -20,15 +20,14 @@ const Item = props => {
 
 const TypeaheadContent = props => {
   const { data, error } = useSWR(`${ApiURL}/search/users?q=${props.searchKey}&client_id=${GithubGlientId}&client_secret=${GithubSecretKey}`, fetcher);
-
   return (
     <>
-      { data && <div className="Typeahead-dropdown">
+      { data && data.items && <div className="Typeahead-dropdown">
         { data.items.map(item => <Item key={item.id} username={item.login} avatar_url={item.avatar_url} setKey={props.setKey} />) }
       </div> }
       
       { !error && !data && <div className="Loading-bar">Loading...</div> }
-      { error && <div className="Loading-bar">Something went wrong...</div> }
+      { error || (data && !data.items) && <div className="Loading-bar">API call limit Exceed, Wait for a while...</div> }
     </>
   )
 }
@@ -43,7 +42,7 @@ const Typeahead = props => {
 
   return (
     <div className="Typeahead-continer">
-      <input className="Typeahead-input" value={searchKey} onChange={(e) => onChangeText(e)} /> 
+      <input className="Typeahead-input" value={searchKey} onChange={(e) => onChangeText(e) } /> 
       { searchKey !== '' && <TypeaheadContent searchKey={searchKey} setKey={setSearchKey} /> }
     </div>
   )
